@@ -1,0 +1,855 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Bienvenue au monde du français : un espace pour apprendre et réviser le français A1-A2.">
+<title>Bienvenue au monde du français</title>
+
+<style>
+:root {
+  --primary: #D5E4F4;
+  --dark: #315779;
+  --deep: #203F5D;
+  --light: #F3F7FC;
+  --text: #263746;
+  --muted: #657789;
+  --white: #FFFFFF;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: var(--text);
+  background: #FBFCFE;
+  line-height: 1.7;
+}
+
+header {
+  background: white;
+  padding: 15px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #E2EAF2;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  color: var(--deep);
+  font-size: 21px;
+  font-weight: bold;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+nav a {
+  color: var(--dark);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+nav a:hover {
+  color: #7398BD;
+}
+
+.menu-button {
+  display: none;
+  border: 1px solid var(--primary);
+  background: white;
+  color: var(--dark);
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.hero {
+  background: linear-gradient(135deg,#D5E4F4,#F3F7FC);
+  padding: 95px 8%;
+  text-align: center;
+}
+
+.hero h1 {
+  color: var(--deep);
+  font-size: clamp(32px,5vw,55px);
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  color: #52677D;
+  font-size: 18px;
+}
+
+.button {
+  display: inline-block;
+  background: var(--dark);
+  color: white;
+  padding: 12px 23px;
+  border-radius: 10px;
+  text-decoration: none;
+  margin-top: 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.button:hover {
+  background: var(--deep);
+}
+
+section {
+  padding: 65px 8%;
+}
+
+h2 {
+  color: var(--deep);
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.intro {
+  color: var(--muted);
+  margin-bottom: 30px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #E2EAF2;
+  padding: 25px;
+  border-radius: 18px;
+  transition: .2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px #D5E4F455;
+}
+
+.card .icon {
+  font-size: 35px;
+}
+
+.card h3 {
+  color: var(--dark);
+}
+
+.card p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.card a {
+  color: var(--dark);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.soft {
+  background: var(--light);
+}
+
+.panel {
+  background: white;
+  border-radius: 18px;
+  padding: 25px;
+  margin-bottom: 20px;
+  border: 1px solid #E2EAF2;
+}
+
+.panel h3 {
+  color: var(--dark);
+}
+
+.word {
+  font-size: 26px;
+  font-weight: bold;
+  color: var(--deep);
+}
+
+button.option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 13px;
+  margin: 8px 0;
+  border: 1px solid #D5E4F4;
+  border-radius: 9px;
+  background: white;
+  cursor: pointer;
+  color: var(--text);
+}
+
+button.option:hover {
+  background: var(--light);
+}
+
+button.option.correct {
+  background: #E9F5EC;
+  border-color: #77A987;
+}
+
+button.option.wrong {
+  background: #FFF0F0;
+  border-color: #D78C8C;
+}
+
+.feedback {
+  color: var(--dark);
+  font-weight: bold;
+  min-height: 28px;
+}
+
+#messages {
+  height: 280px;
+  overflow-y: auto;
+  background: var(--light);
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.message {
+  background: white;
+  padding: 10px 14px;
+  border-radius: 12px;
+  margin: 8px 0;
+  max-width: 90%;
+  overflow-wrap: anywhere;
+}
+
+.message.user {
+  background: var(--primary);
+  margin-left: auto;
+}
+
+.chat-form {
+  display: flex;
+  gap: 8px;
+}
+
+input {
+  padding: 12px;
+  border: 1px solid #D5E4F4;
+  border-radius: 9px;
+  flex: 1;
+  min-width: 0;
+}
+
+footer {
+  background: var(--deep);
+  color: white;
+  text-align: center;
+  padding: 30px;
+}
+
+footer p {
+  color: #D5E4F4;
+}
+
+@media(max-width:900px) {
+  .cards {
+    grid-template-columns: repeat(2,1fr);
+  }
+
+  header {
+    padding: 15px 5%;
+  }
+
+  nav {
+    gap: 10px;
+  }
+
+  nav a {
+    font-size: 12px;
+  }
+}
+
+@media(max-width:650px) {
+  header {
+    flex-wrap: wrap;
+  }
+
+  .menu-button {
+    display: block;
+  }
+
+  nav {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 0 5px;
+  }
+
+  nav.open {
+    display: flex;
+  }
+
+  nav a {
+    font-size: 15px;
+    padding: 5px 0;
+  }
+
+  .hero {
+    padding: 65px 6%;
+  }
+
+  section {
+    padding: 45px 6%;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .chat-form {
+    flex-direction: column;
+  }
+
+  .chat-form .button {
+    width: 100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<header>
+  <div class="logo">🇫🇷 Le monde du français</div>
+
+  <button class="menu-button"
+    id="menuButton"
+    aria-label="Ouvrir le menu"
+    aria-expanded="false">
+    ☰
+  </button>
+
+  <nav id="navigation">
+    <a href="#accueil">Accueil</a>
+    <a href="#vocabulaire">Vocabulaire</a>
+    <a href="#grammaire">Grammaire</a>
+    <a href="#prononciation">Prononciation</a>
+    <a href="#exercices">Exercices</a>
+    <a href="#assistant">Assistant IA</a>
+  </nav>
+</header>
+
+<!-- ACCUEIL -->
+<div class="hero" id="accueil">
+  <h1>Bienvenue au monde du français !</h1>
+
+  <p>
+    Apprenez, révisez et progressez en français à votre rythme.
+  </p>
+
+  <p>
+    Un espace pédagogique pour les apprenants adultes
+    de niveau A1 à A2.
+  </p>
+
+  <a href="#rubriques" class="button">
+    Commencer à apprendre →
+  </a>
+</div>
+
+<!-- RUBRIQUES -->
+<section id="rubriques">
+
+  <h2>Explorez nos rubriques</h2>
+
+  <p class="intro">
+    Choisissez votre activité et améliorez votre français chaque jour !
+  </p>
+
+  <div class="cards">
+
+    <div class="card">
+      <div class="icon">📚</div>
+      <h3>Vocabulaire</h3>
+      <p>
+        Découvrez des mots et expressions utiles
+        pour communiquer dans la vie quotidienne.
+      </p>
+      <a href="#vocabulaire">Découvrir →</a>
+    </div>
+
+    <div class="card">
+      <div class="icon">✏️</div>
+      <h3>Grammaire</h3>
+      <p>
+        Comprenez les règles essentielles
+        avec des exemples simples.
+      </p>
+      <a href="#grammaire">Découvrir →</a>
+    </div>
+
+    <div class="card">
+      <div class="icon">🔊</div>
+      <h3>Prononciation</h3>
+      <p>
+        Écoutez et répétez des mots
+        et des phrases en français.
+      </p>
+      <a href="#prononciation">Découvrir →</a>
+    </div>
+
+    <div class="card">
+      <div class="icon">🎯</div>
+      <h3>Exercices</h3>
+      <p>
+        Testez vos connaissances grâce
+        à des quiz interactifs.
+      </p>
+      <a href="#exercices">Découvrir →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- VOCABULAIRE -->
+<section class="soft" id="vocabulaire">
+
+  <h2>📚 Le mot du jour</h2>
+
+  <div class="panel">
+
+    <h3 class="word" id="word">Une habitude</h3>
+
+    <p id="meaning">
+      습관 : une chose que l'on fait régulièrement.
+    </p>
+
+    <button class="button" onclick="newWord()">
+      Autre mot ↻
+    </button>
+
+    <button class="button" onclick="speakWord()">
+      🔊 Écouter
+    </button>
+
+  </div>
+</section>
+
+<!-- GRAMMAIRE -->
+<section id="grammaire">
+
+  <h2>✏️ Point de grammaire</h2>
+
+  <div class="panel">
+
+    <h3>Le passé composé</h3>
+
+    <p>
+      Le passé composé permet de parler
+      d'une action passée.
+    </p>
+
+    <p>
+      <strong>Formation :</strong>
+      avoir ou être au présent + participe passé.
+    </p>
+
+    <h3>Exemples</h3>
+
+    <ul>
+      <li>J'ai mangé une pomme.</li>
+      <li>Elle est arrivée à huit heures.</li>
+      <li>Nous avons regardé un film.</li>
+    </ul>
+
+    <p>
+      <strong>À retenir :</strong>
+      le verbe aller se conjugue avec être au passé composé.
+    </p>
+
+    <button class="button" onclick="showGrammarHint()">
+      Voir un indice
+    </button>
+
+    <p id="grammarHint" class="feedback"></p>
+
+  </div>
+</section>
+
+<!-- PRONONCIATION -->
+<section class="soft" id="prononciation">
+
+  <h2>🔊 Prononciation</h2>
+
+  <div class="panel">
+
+    <h3>Écoutez et répétez</h3>
+
+    <p class="word">
+      Bonjour, comment allez-vous ?
+    </p>
+
+    <p>
+      Écoutez la phrase et répétez-la à voix haute.
+    </p>
+
+    <button class="button" onclick="speakFrench()">
+      ▶ Écouter
+    </button>
+
+    <button class="button" onclick="stopSpeech()">
+      ■ Arrêter
+    </button>
+
+    <p id="speechFeedback" class="feedback"></p>
+
+  </div>
+</section>
+
+<!-- EXERCICES -->
+<section id="exercices">
+
+  <h2>🎯 Mini-quiz</h2>
+
+  <div class="panel">
+
+    <h3>Complétez la phrase :</h3>
+
+    <p class="word">
+      Hier, je ______ au cinéma.
+    </p>
+
+    <button class="option"
+      onclick="checkAnswer(this,false)">
+      a) vais
+    </button>
+
+    <button class="option"
+      onclick="checkAnswer(this,true)">
+      b) suis allé(e)
+    </button>
+
+    <button class="option"
+      onclick="checkAnswer(this,false)">
+      c) aller
+    </button>
+
+    <p id="result" class="feedback" aria-live="polite"></p>
+
+  </div>
+</section>
+
+<!-- ASSISTANT PEDAGOGIQUE -->
+<section class="soft" id="assistant">
+
+  <h2>🤖 Mon assistant de français</h2>
+
+  <p class="intro">
+    Posez vos questions et apprenez avec votre assistant pédagogique.
+  </p>
+
+  <div class="panel">
+
+    <h3>Bonjour ! Je suis votre assistant.</h3>
+
+    <p>
+      Je peux vous aider à réviser le vocabulaire,
+      la grammaire et la prononciation.
+    </p>
+
+    <div id="messages" aria-live="polite">
+
+      <div class="message">
+        Bonjour ! 😊
+        Je suis ton assistant de français.
+        Pose-moi une question sur la grammaire,
+        le vocabulaire ou la prononciation !
+      </div>
+
+    </div>
+
+    <form class="chat-form" id="chatForm">
+
+      <input
+        id="question"
+        type="text"
+        placeholder="Écrivez votre question..."
+        required
+      >
+
+      <button class="button" type="submit">
+        Envoyer
+      </button>
+
+    </form>
+
+    <p style="font-size:12px;color:#657789">
+      Version de démonstration :
+      les réponses sont prédéfinies.
+      Une connexion à une API IA sera nécessaire
+      pour obtenir de véritables réponses personnalisées.
+    </p>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+
+  <h3>Bienvenue au monde du français 🇫🇷</h3>
+
+  <p>Apprendre · Réviser · Progresser</p>
+
+  <p>
+    Un site pédagogique pour les niveaux A1–A2
+  </p>
+
+</footer>
+
+<script>
+
+// MENU MOBILE
+const menuButton = document.getElementById("menuButton");
+const navigation = document.getElementById("navigation");
+
+menuButton.addEventListener("click", function() {
+  navigation.classList.toggle("open");
+
+  const isOpen = navigation.classList.contains("open");
+  menuButton.setAttribute("aria-expanded", isOpen);
+});
+
+navigation.querySelectorAll("a").forEach(function(link) {
+  link.addEventListener("click", function() {
+    navigation.classList.remove("open");
+    menuButton.setAttribute("aria-expanded", "false");
+  });
+});
+
+
+// VOCABULAIRE
+const vocabulary = [
+  ["Une habitude", "습관 : une chose que l'on fait régulièrement."],
+  ["Un rendez-vous", "약속 : une rencontre prévue à l'avance."],
+  ["Se dépêcher", "서두르다 : faire quelque chose rapidement."],
+  ["Un conseil", "조언 : une idée pour aider quelqu'un."],
+  ["Emprunter", "빌리다 : prendre quelque chose pour le rendre plus tard."],
+  ["Une amélioration", "개선 : le fait de rendre quelque chose meilleur."],
+  ["Se souvenir", "기억하다 : garder quelque chose dans sa mémoire."]
+];
+
+let index = 0;
+
+function newWord() {
+
+  index = (index + 1) % vocabulary.length;
+
+  document.getElementById("word").textContent =
+    vocabulary[index][0];
+
+  document.getElementById("meaning").textContent =
+    vocabulary[index][1];
+
+}
+
+function speak(text) {
+
+  if (!("speechSynthesis" in window)) {
+    alert("La lecture vocale n'est pas disponible.");
+    return;
+  }
+
+  speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(text);
+
+  utterance.lang = "fr-FR";
+  utterance.rate = 0.85;
+
+  speechSynthesis.speak(utterance);
+}
+
+function speakWord() {
+  speak(vocabulary[index][0]);
+}
+
+
+// PRONONCIATION
+function speakFrench() {
+
+  speak("Bonjour, comment allez-vous ?");
+
+  document.getElementById("speechFeedback").textContent =
+    "Écoutez attentivement et répétez la phrase.";
+
+}
+
+function stopSpeech() {
+
+  if ("speechSynthesis" in window) {
+    speechSynthesis.cancel();
+  }
+
+  document.getElementById("speechFeedback").textContent =
+    "Lecture arrêtée.";
+
+}
+
+
+// GRAMMAIRE
+function showGrammarHint() {
+
+  document.getElementById("grammarHint").textContent =
+    "Indice : pour former le passé composé de aller, utilise l'auxiliaire être au présent.";
+
+}
+
+
+// QUIZ
+function checkAnswer(button, correct) {
+
+  const result = document.getElementById("result");
+
+  document.querySelectorAll(".option").forEach(function(item) {
+    item.classList.remove("correct", "wrong");
+  });
+
+  if (correct) {
+
+    button.classList.add("correct");
+
+    result.textContent =
+      "Bravo ! 🎉 Aller se conjugue avec être au passé composé.";
+
+    result.style.color = "green";
+
+  } else {
+
+    button.classList.add("wrong");
+
+    result.textContent =
+      "Pas tout à fait ! Indice : quel auxiliaire utilise-t-on avec aller ?";
+
+    result.style.color = "#B45A5A";
+
+  }
+
+}
+
+
+// ASSISTANT PEDAGOGIQUE - DEMONSTRATION
+const messages = document.getElementById("messages");
+const chatForm = document.getElementById("chatForm");
+const input = document.getElementById("question");
+
+function addMessage(text, type) {
+
+  const message = document.createElement("div");
+
+  message.className = "message " + type;
+  message.textContent = text;
+
+  messages.appendChild(message);
+
+  messages.scrollTop = messages.scrollHeight;
+
+}
+
+function getAssistantReply(question) {
+
+  const q = question.toLowerCase();
+
+  if (q.includes("bonjour") || q.includes("salut")) {
+
+    return "Bonjour ! 😊 Que souhaites-tu apprendre aujourd'hui ?";
+
+  }
+
+  if (q.includes("passé composé") || q.includes("passe compose")) {
+
+    return "Le passé composé permet de parler d'une action passée. Il se forme avec avoir ou être au présent + participe passé. Exemple : J'ai mangé. Petit indice : quel auxiliaire utilise-t-on avec aller ?";
+
+  }
+
+  if (q.includes("être") || q.includes("etre") || q.includes("avoir")) {
+
+    return "Être exprime souvent un état ou une identité : Je suis étudiant. Avoir exprime notamment la possession : J'ai un livre. Peux-tu inventer une phrase avec chacun ?";
+
+  }
+
+  if (q.includes("exercice") || q.includes("quiz")) {
+
+    return "Petit exercice : complète cette phrase : Aujourd'hui, nous _____ le français (étudier). Indice : pense à la terminaison du verbe avec nous au présent.";
+
+  }
+
+  if (q.includes("vocabulaire") || q.includes("mot")) {
+
+    return "Pour mémoriser un nouveau mot, essaie de l'utiliser dans une phrase personnelle. Quel mot souhaites-tu découvrir ?";
+
+  }
+
+  if (q.includes("prononciation") || q.includes("prononcer")) {
+
+    return "Pour améliorer ta prononciation, écoute d'abord une phrase, répète-la lentement, puis essaie de garder le même rythme. Tu peux utiliser notre rubrique Prononciation.";
+
+  }
+
+  if (q.includes("merci")) {
+
+    return "Avec plaisir ! Continue à pratiquer un peu chaque jour. Tu progresses pas à pas ! 🌟";
+
+  }
+
+  return "Bonne question ! 😊 Peux-tu me donner un exemple ? Je peux t'aider en vocabulaire, grammaire et prononciation au niveau A1–A2. Essaie de réfléchir : quel élément de la phrase te pose problème ?";
+
+}
+
+chatForm.addEventListener("submit", function(event) {
+
+  event.preventDefault();
+
+  const question = input.value.trim();
+
+  if (!question) return;
+
+  addMessage(question, "user");
+
+  input.value = "";
+
+  const reply = getAssistantReply(question);
+
+  setTimeout(function() {
+
+    addMessage(reply, "bot");
+
+  }, 350);
+
+});
+
+</script>
+
+</body>
+</html>
